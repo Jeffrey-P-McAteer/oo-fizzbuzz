@@ -31,9 +31,20 @@ public class FizzBuzzMain {
         System.out.printf("FizzBuzzing up to %d%n", max);
         
         // Proceed with an efficient use of RAM
-        HashMap<Long, FBI> a_very_short_camel_case_name = new HashMap<Long, FBI>();
-        for (long l = 0; l < max; l++) {
-            a_very_short_camel_case_name.put(l, FizzBuzzFactory.getFBI(l));
+        HashMap<Long, FBI> a_very_short_camel_case_name = null;
+        while (a_very_short_camel_case_name == null) {
+          try {
+            a_very_short_camel_case_name = new HashMap<Long, FBI>();
+            for (long l = 0; l < max; l++) {
+                a_very_short_camel_case_name.put(l, FizzBuzzFactory.getFBI(l));
+            }
+          }
+          catch (OutOfMemoryError oom) {
+            a_very_short_camel_case_name = null;
+            max /= 2;
+            System.out.println("Dear user, please purchase the Ultra-High Memory package to use this");
+            System.out.printf("feature. The Lite version will continue with max = %d%n", max);
+          }
         }
         
         for (Long key : a_very_short_camel_case_name.keySet()) {
